@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FELD APOTHEKE — Rebranding Portfolio</title>
+
+  <!-- ============================================================
+       📌 FONT 교체 방법
+       아래 Google Fonts 링크에서 원하는 폰트로 바꾸세요.
+       현재: Bebas Neue (헤딩) + Noto Sans KR (본문)
+       예시 교체: https://fonts.google.com/
+  ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       🎨 COLOR & FONT VARIABLES — 전역 변수 (여기서 한 번에 수정)
+    ============================================================ */
+    :root {
+      --feld-blue:   #1B4FE4;   /* 메인 블루 */
+      --feld-deep:   #0D2EB0;   /* 딥 블루 */
+      --feld-ice:    #D6E4FF;   /* 아이스 블루 */
+      --white:       #FFFFFF;
+      --off-white:   #F7F8FC;
+      --gray-100:    #F0F2F8;
+      --gray-300:    #C4CBDC;
+      --gray-500:    #717993;
+      --black:       #0B0D14;
+
+      /* 📌 FONT 변수 — 폰트 교체 시 여기만 수정하면 전체 적용 */
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Noto Sans KR', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 999;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 60px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-100);
+      transition: padding .3s;
+    }
+    nav .nav-logo {
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: var(--feld-blue);
+    }
+    nav ul {
+      list-style: none;
+      display: flex; gap: 36px;
+    }
+    nav ul a {
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--feld-blue); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--black);
+      overflow: hidden;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 140px 60px 80px;
+      position: relative; z-index: 1;
+    }
+    .hero-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--feld-blue);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 8vw, 120px);
+      line-height: .95;
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .hero-title span { color: var(--feld-blue); }
+    .hero-sub {
+      font-size: 14px;
+      color: var(--gray-300);
+      line-height: 1.8;
+      max-width: 420px;
+      margin-bottom: 48px;
+    }
+    .hero-roles {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .hero-roles span {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: var(--feld-blue);
+      border: 1px solid var(--feld-blue);
+      padding: 6px 14px;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       📌 HERO 이미지 교체 방법
+       .hero-right 안의 background-image URL을 바꾸거나,
+       <img> 태그로 대체하세요.
+    ============================================================ */
+    .hero-right {
+      position: relative; overflow: hidden;
+    }
+    .hero-img-placeholder {
+      width: 100%; height: 100%;
+      background:
+        linear-gradient(135deg, var(--feld-deep) 0%, var(--feld-blue) 50%, #4A7FFF 100%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end; align-items: flex-start;
+      padding: 60px;
+    }
+    /* 📌 이미지 교체 시: .hero-img-placeholder에 background-image 추가
+       예시: background-image: url('your-hero-image.jpg');
+             background-size: cover; background-position: center;
+    */
+    .hero-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--black) 0%, transparent 40%);
+    }
+    .hero-product-badge {
+      position: relative; z-index: 2;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 2px;
+    }
+    .hero-product-badge strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 28px;
+      letter-spacing: 3px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 60px; }
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--feld-blue);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 72px);
+      line-height: 1.0;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+    }
+    .section-desc {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--gray-500);
+      max-width: 560px;
+    }
+    .divider {
+      width: 100%; height: 1px;
+      background: var(--gray-100);
+    }
+
+    /* ── OVERVIEW ── */
+    #overview {
+      background: var(--off-white);
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .overview-card {
+      background: var(--white);
+      padding: 36px 28px;
+      border-top: 3px solid var(--feld-blue);
+    }
+    .overview-card h3 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      letter-spacing: 1px;
+      color: var(--feld-blue);
+      margin-bottom: 16px;
+    }
+    .overview-card ul {
+      list-style: none; padding: 0;
+    }
+    .overview-card ul li {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 2;
+      padding-left: 12px;
+      position: relative;
+    }
+    .overview-card ul li::before {
+      content: "—";
+      position: absolute; left: 0;
+      color: var(--gray-300);
+    }
+
+    /* ── DIAGNOSIS (Before/After) ── */
+    #diagnosis {
+      background: var(--black);
+      color: var(--white);
+    }
+    #diagnosis .section-title { color: var(--white); }
+    #diagnosis .section-desc { color: var(--gray-300); }
+    .ba-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .ba-card {
+      padding: 48px 40px;
+      position: relative;
+    }
+    .ba-card.before { background: #151820; }
+    .ba-card.after  { background: var(--feld-blue); }
+    .ba-label {
+      font-family: var(--font-display);
+      font-size: 14px;
+      letter-spacing: 4px;
+      margin-bottom: 32px;
+      opacity: 0.5;
+    }
+    .ba-card.after .ba-label { color: var(--white); opacity: 0.7; }
+    .ba-card ul { list-style: none; }
+    .ba-card ul li {
+      font-size: 14px;
+      line-height: 1;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      color: var(--gray-300);
+    }
+    .ba-card.after ul li { color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.15); }
+    .ba-arrow {
+      position: absolute; right: -20px; top: 50%;
+      transform: translateY(-50%);
+      width: 40px; height: 40px;
+      background: var(--feld-blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: white; z-index: 2;
+    }
+
+    /* ── OBJECTIVE ── */
+    #objective { background: var(--white); }
+    .obj-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .obj-card {
+      padding: 32px 24px;
+      border: 1px solid var(--gray-100);
+      position: relative;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .obj-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(27,79,228,0.08);
+    }
+    .obj-num {
+      font-family: var(--font-display);
+      font-size: 64px;
+      color: var(--feld-ice);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .obj-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--feld-blue);
+      margin-bottom: 12px;
+    }
+    .obj-desc {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--gray-500);
+    }
+    .obj-detail {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--black);
+      margin-top: 8px;
+    }
+    .quote-band {
+      margin-top: 60px;
+      background: var(--feld-blue);
+      padding: 40px 60px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 36px);
+      letter-spacing: 3px;
+      color: var(--white);
+    }
+
+    /* ── CORE IDENTITY ── */
+    #identity { background: var(--off-white); }
+    .identity-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 56px;
+    }
+    .identity-keywords {
+      display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .kw-tag {
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 2px;
+    }
+    .kw-tag.primary   { background: var(--feld-blue); color: white; }
+    .kw-tag.secondary { background: var(--white); color: var(--feld-blue); border: 1px solid var(--feld-blue); }
+    .kw-tag.muted     { background: var(--white); color: var(--gray-500); border: 1px solid var(--gray-300); }
+    .color-swatches {
+      display: flex; gap: 0;
+      margin-top: 40px; border-radius: 4px; overflow: hidden;
+    }
+    .swatch {
+      flex: 1; height: 60px;
+      display: flex; align-items: flex-end;
+      padding: 8px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+    }
+    .s1 { background: #1B4FE4; color: white; }
+    .s2 { background: #FFFFFF; color: #999; border: 1px solid #eee; }
+    .s3 { background: #0B0D14; color: #666; }
+    .s4 { background: #D6E4FF; color: #1B4FE4; }
+    .brand-message-big {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 80px);
+      line-height: 1.05;
+      letter-spacing: 1px;
+    }
+    .brand-message-big span { color: var(--feld-blue); }
+
+    /* ── HERO SKU ── */
+    #hero-sku { background: var(--white); }
+    .sku-flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 0;
+      margin-top: 56px;
+    }
+    .sku-card {
+      background: var(--off-white);
+      padding: 40px 32px;
+      border: 1px solid var(--gray-100);
+    }
+    .sku-card.active {
+      background: var(--black);
+      border-color: var(--feld-blue);
+    }
+    .sku-phase {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .sku-card.active .sku-phase { color: var(--feld-blue); }
+    .sku-card:not(.active) .sku-phase { color: var(--gray-500); }
+
+    /* ============================================================
+       📌 SKU 이미지 교체 방법
+       .sku-img-box 안에 <img> 태그를 추가하거나
+       background-image로 바꾸세요.
+    ============================================================ */
+    .sku-img-box {
+      width: 100%; aspect-ratio: 1;
+      background: linear-gradient(135deg, #1B4FE4 0%, #4A7FFF 100%);
+      border-radius: 2px;
+      margin-bottom: 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 2px;
+    }
+    .sku-img-box.dim { background: var(--gray-100); }
+    .sku-name {
+      font-family: var(--font-display);
+      font-size: 28px;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .sku-card.active .sku-name { color: var(--white); }
+    .sku-sub {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+    .sku-arrow {
+      font-size: 24px;
+      color: var(--feld-blue);
+      padding: 0 16px;
+    }
+    .sku-timeline {
+      margin-top: 32px;
+      background: var(--feld-ice);
+      padding: 20px 32px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--feld-deep);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── UX RENEWAL ── */
+    #ux-renewal { background: var(--off-white); }
+    .ux-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    /* ============================================================
+       📌 스크린샷 이미지 교체 방법
+       .ux-screen 태그의 background-image를 교체하거나
+       <img src="your-screenshot.jpg"> 로 바꾸세요.
+    ============================================================ */
+    .ux-screen {
+      aspect-ratio: 16/10;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--gray-300);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 2px; color: rgba(255,255,255,0.4);
+    }
+    .ux-screen.before-screen {
+      background: linear-gradient(160deg, #ccc 0%, #e5e5e5 100%);
+      color: var(--gray-500);
+    }
+    .ux-screen.after-screen {
+      background: linear-gradient(160deg, var(--feld-deep) 0%, var(--feld-blue) 100%);
+    }
+    .ux-flow-list {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .ux-flow-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 20px 24px;
+      background: var(--white);
+    }
+    .ux-flow-item.highlight { border-left: 3px solid var(--feld-blue); }
+    .ux-icon {
+      width: 36px; height: 36px; min-width: 36px;
+      background: var(--feld-ice);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .ux-flow-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+    .ux-flow-desc {
+      font-size: 12px;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    /* ── PRODUCT COMMUNICATION ── */
+    #product-comm { background: var(--black); color: var(--white); }
+    #product-comm .section-title { color: var(--white); }
+    #product-comm .section-desc { color: var(--gray-300); }
+    .detail-arch {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .arch-step {
+      padding: 32px 20px;
+      background: #151820;
+      position: relative;
+    }
+    .arch-step::after {
+      content: '';
+      position: absolute; right: -1px; top: 20%; height: 60%;
+      width: 1px; background: var(--feld-blue); opacity: 0.3;
+    }
+    .arch-step:last-child::after { display: none; }
+    .arch-num {
+      font-family: var(--font-display);
+      font-size: 48px;
+      color: var(--feld-blue);
+      opacity: 0.4;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .arch-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--feld-blue);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .arch-desc {
+      font-size: 13px;
+      color: var(--gray-300);
+      line-height: 1.7;
+    }
+
+    /* ── PACKAGE ── */
+    #package { background: var(--white); }
+    .pkg-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .pkg-card {
+      border: 1px solid var(--gray-100);
+      transition: transform .3s;
+      cursor: default;
+    }
+    .pkg-card:hover { transform: translateY(-4px); }
+
+    /* ============================================================
+       📌 패키지 이미지 교체 방법
+       .pkg-img 클래스에 background-image를 추가하거나
+       <img> 태그로 대체하세요.
+    ============================================================ */
+    .pkg-img {
+      aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 1.5px; color: rgba(255,255,255,0.5);
+    }
+    .pkg-img.p1 { background: linear-gradient(135deg, #D6E4FF, #90B8FF); color: var(--feld-blue); }
+    .pkg-img.p2 { background: linear-gradient(135deg, #C8D8F0, #7AACDC); color: var(--feld-deep); }
+    .pkg-img.p3 { background: linear-gradient(135deg, #1B4FE4, #4A7FFF); }
+    .pkg-img.p4 { background: linear-gradient(135deg, #E8EDF8, #C4CBDC); color: var(--gray-500); }
+    .pkg-info { padding: 24px; }
+    .pkg-info h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: var(--feld-blue);
+      margin-bottom: 4px;
+    }
+    .pkg-info .pkg-type {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--gray-500);
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .pkg-info p { font-size: 13px; color: var(--gray-500); line-height: 1.7; }
+
+    /* ── PACKAGE DETAIL CARDS ── */
+    #package-detail { background: var(--off-white); }
+    .pkg-detail-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .pkg-detail-card {
+      background: var(--white);
+      padding: 48px 36px;
+    }
+    .pkg-detail-card h3 {
+      font-family: var(--font-display);
+      font-size: 36px;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .pkg-detail-card p {
+      font-size: 14px; color: var(--gray-500); line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .pkg-points { list-style: none; }
+    .pkg-points li {
+      font-size: 13px;
+      color: var(--black);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-100);
+      padding-left: 16px;
+      position: relative;
+    }
+    .pkg-points li::before {
+      content: "●";
+      position: absolute; left: 0;
+      color: var(--feld-blue);
+      font-size: 8px;
+      top: 14px;
+    }
+    .concept-copy {
+      margin-top: 24px;
+      background: var(--feld-blue);
+      padding: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ── CAMPAIGN ── */
+    #campaign { background: var(--black); color: var(--white); }
+    #campaign .section-title { color: var(--white); }
+    #campaign .section-desc { color: var(--gray-300); }
+    .campaign-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2px;
+      margin-top: 56px;
+    }
+
+    /* ============================================================
+       📌 캠페인 이미지 교체 방법
+       .camp-item의 background를 background-image로 교체하세요.
+    ============================================================ */
+    .camp-item {
+      aspect-ratio: 3/4;
+      padding: 24px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      position: relative; overflow: hidden;
+    }
+    .camp-item.c1 { background: linear-gradient(160deg, var(--feld-deep), var(--feld-blue)); aspect-ratio: auto; }
+    .camp-item.c2 { background: #1A2030; }
+    .camp-item.c3 { background: #0D1828; }
+    .camp-item.c4 { background: #151D2A; }
+    .camp-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .camp-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: var(--white);
+    }
+    .camp-desc {
+      font-size: 12px; color: rgba(255,255,255,0.5);
+      margin-top: 4px; line-height: 1.6;
+    }
+
+    /* ── OUTCOME ── */
+    #outcome { background: var(--feld-blue); color: var(--white); }
+    .outcome-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .outcome-title {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 6vw, 88px);
+      line-height: .95;
+      letter-spacing: 1px;
+      margin-bottom: 32px;
+    }
+    .outcome-desc {
+      font-size: 15px; line-height: 1.9;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+    }
+    .outcome-items {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    }
+    .outcome-item {
+      background: rgba(0,0,0,0.15);
+      padding: 24px 20px;
+    }
+    .outcome-item-label {
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .outcome-item-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+    }
+    .outcome-big-text {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 56px);
+      line-height: 1.2;
+      color: rgba(255,255,255,0.15);
+      letter-spacing: 2px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      padding: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 28px;
+      letter-spacing: 4px;
+      color: var(--white);
+    }
+    .footer-logo span { color: var(--feld-blue); }
+    .footer-meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray-500);
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0;
+      height: 3px; background: var(--feld-blue);
+      z-index: 9999; width: 0%;
+      transition: width .05s linear;
+    }
+
+    /* ── FADE IN ANIMATION ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      nav { padding: 16px 24px; }
+      nav ul { gap: 20px; }
+      section { padding: 80px 24px; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .overview-grid, .detail-arch, .pkg-grid { grid-template-columns: 1fr 1fr; }
+      .obj-grid { grid-template-columns: 1fr 1fr; }
+      .sku-flow { grid-template-columns: 1fr; }
+      .sku-arrow { transform: rotate(90deg); text-align: center; }
+      .ba-grid, .ux-layout, .identity-layout,
+      .pkg-detail-layout, .campaign-grid,
+      .outcome-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+      .overview-grid, .obj-grid, .pkg-grid,
+      .detail-arch { grid-template-columns: 1fr; }
+      .quote-band { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS BAR -->
+<div class="scroll-progress" id="scrollBar"></div>
+
+<!-- ============================================================
+     NAV
+============================================================ -->
+<nav>
+  <div class="nav-logo">FELD·APOTHEKE</div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#objective">Objective</a></li>
+    <li><a href="#hero-sku">Hero SKU</a></li>
+    <li><a href="#ux-renewal">UI/UX</a></li>
+    <li><a href="#package">Package</a></li>
+    <li><a href="#outcome">Outcome</a></li>
+  </ul>
+</nav>
+
+<!-- ============================================================
+     01. HERO
+============================================================ -->
+<section id="hero" style="padding:0;">
+  <div class="hero-left">
+    <p class="hero-tag">Branding Design Portfolio</p>
+    <h1 class="hero-title">FELD<br/><span>APOTHEKE</span></h1>
+    <p class="hero-sub">
+      민감 피부 기능성 스킨케어 브랜드의 메시지, 상품 구조, 자사몰 UI/UX,
+      패키지 및 콘텐츠 접점을 하나의 브랜드 경험으로 정리한 프로젝트 시안
+    </p>
+    <div class="hero-roles">
+      <span>Package Design</span>
+      <span>Website UI&amp;UX</span>
+      <span>Brand Application</span>
+      <span>Contents Direction</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- 📌 여기에 이미지 교체: background-image: url('your-cover-image.jpg') -->
+    <div class="hero-img-placeholder">
+      <div class="hero-img-overlay"></div>
+      <div class="hero-product-badge" style="position:relative;z-index:2;">
+        <strong>PHYTO CALM<br/>SERUM</strong>
+        PureRex-AC 2% · 1.01 fl.oz / 30ml
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     02. PROJECT OVERVIEW
+============================================================ -->
+<section id="overview">
+  <div class="section-tag fade-up">02 — Project Overview</div>
+  <h2 class="section-title fade-up">FELD APOTHEKE<br/>Brand Application Case</h2>
+  <p class="section-desc fade-up">
+    FELD APOTHEKE는 민감 피부를 위한 기능 중심 스킨케어 브랜드로, 자사몰과 네이버 스마트스토어를 중심으로
+    D2C 유통을 운영하는 코스메틱 브랜드입니다. 패키지 디자이너로 입사하여 기존 패키지 운영 및 개선, GWP 상품 기획,
+    신제품 패키지 초기 기획, 브랜드 전략 자료 작성, 자사몰 리뉴얼 실무에 참여했습니다.
+  </p>
+  <div class="overview-grid fade-up">
+    <div class="overview-card">
+      <h3>Brand</h3>
+      <ul>
+        <li>Strategy Document</li>
+        <li>Hero SKU / Campaign</li>
+      </ul>
+    </div>
+    <div class="overview-card">
+      <h3>Web</h3>
+      <ul>
+        <li>Cafe24 UI/UX</li>
+        <li>PC/MO Renewal</li>
+      </ul>
+    </div>
+    <div class="overview-card">
+      <h3>Package</h3>
+      <ul>
+        <li>Tone-up Cream</li>
+        <li>Welcome Kit</li>
+        <li>Lip Balm</li>
+      </ul>
+    </div>
+    <div class="overview-card">
+      <h3>Contents</h3>
+      <ul>
+        <li>Leaflet / Banner</li>
+        <li>SNS / Detail Page</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     03. BRAND DIAGNOSIS
+============================================================ -->
+<section id="diagnosis">
+  <div class="section-tag fade-up">03 — Brand Diagnosis</div>
+  <h2 class="section-title fade-up">브랜드가 기억되는 방식을<br/>더 명확하게 정리</h2>
+  <p class="section-desc fade-up">
+    기존 펠드는 야전 약국, 기능성, 피부 고민별 제품군 등 좋은 자산을 가지고 있었지만,
+    소비자가 기억할 대표 메시지와 대표 상품 중심의 구조가 더 필요했습니다.
+  </p>
+  <div class="ba-grid fade-up" style="position:relative;">
+    <div class="ba-card before">
+      <div class="ba-label">BEFORE</div>
+      <ul>
+        <li>기능성 제품군과 프로모션 중심</li>
+        <li>피부 고민별/제품 유형별 카테고리가 넓게 분산</li>
+        <li>이벤트, 쿠폰, 상품 정보가 동시에 노출</li>
+        <li>에어리 선스크린 중심의 계절성 강한 인상</li>
+      </ul>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-card after">
+      <div class="ba-label">AFTER</div>
+      <ul>
+        <li>민감 피부 솔루션 브랜드로 압축</li>
+        <li>필요에서 시작해, 결국 편안함으로 메시지 정리</li>
+        <li>피토캄 세럼을 중심으로 Hero SKU 전략 강화</li>
+        <li>브랜드 이해 – 제품 탐색 – 구매 전환 흐름으로 개선</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     04. OBJECTIVE
+============================================================ -->
+<section id="objective">
+  <div class="section-tag fade-up">04 — Rebranding Objective</div>
+  <h2 class="section-title fade-up">기능성 제품 브랜드에서<br/>민감 피부 솔루션 브랜드로</h2>
+  <p class="section-desc fade-up">
+    리브랜딩의 목표는 펠드가 가진 "야전 약국"의 철학을 유지하면서도, 소비자가 더 빠르게
+    이해하고 기억할 수 있는 브랜드 메시지로 정리하는 것이었습니다.
+  </p>
+  <div class="obj-grid fade-up">
+    <div class="obj-card">
+      <div class="obj-num">01</div>
+      <div class="obj-title">Message</div>
+      <div class="obj-detail">필요 / 편안함 / 신뢰</div>
+      <div class="obj-desc">메시지 단순화</div>
+    </div>
+    <div class="obj-card">
+      <div class="obj-num">02</div>
+      <div class="obj-title">Product</div>
+      <div class="obj-detail">피토캄 세럼 중심</div>
+      <div class="obj-desc">Hero SKU 집중</div>
+    </div>
+    <div class="obj-card">
+      <div class="obj-num">03</div>
+      <div class="obj-title">Commerce</div>
+      <div class="obj-detail">자사몰 UI 흐름</div>
+      <div class="obj-desc">탐색/전환 재구성</div>
+    </div>
+    <div class="obj-card">
+      <div class="obj-num">04</div>
+      <div class="obj-title">Application</div>
+      <div class="obj-detail">패키지, 리플렛, 콘텐츠</div>
+      <div class="obj-desc">일관성 확장</div>
+    </div>
+  </div>
+  <div class="quote-band fade-up">
+    "필요에서 시작해, 결국 편안함으로."
+  </div>
+</section>
+
+<!-- ============================================================
+     05. CORE IDENTITY
+============================================================ -->
+<section id="identity">
+  <div class="section-tag fade-up">05 — Core Identity</div>
+  <div class="identity-layout fade-up">
+    <div>
+      <div class="brand-message-big">
+        From<br/><span>Necessity</span><br/>to Comfort
+      </div>
+      <div class="color-swatches" style="margin-top:40px;">
+        <div class="swatch s1">FELD BLUE</div>
+        <div class="swatch s2">CLEAN WHITE</div>
+        <div class="swatch s3">DEEP BLACK</div>
+        <div class="swatch s4">ICE BLUE</div>
+      </div>
+    </div>
+    <div>
+      <p class="section-desc" style="margin-bottom:32px;">
+        펠드의 새로운 아이덴티티는 피부를 꾸미는 화장품보다, 피부가 불편할 때 가장 먼저
+        찾게 되는 필요 기반의 스킨케어 솔루션에 있습니다. 화려한 표현보다 필요한 성분과
+        기능을 우선하고, 민감한 피부가 다시 편안함을 느낄 수 있도록 브랜드 경험을 설계합니다.
+      </p>
+      <div class="identity-keywords">
+        <span class="kw-tag primary">Sensitive Skin Solution</span>
+        <span class="kw-tag secondary">Necessity</span>
+        <span class="kw-tag secondary">Comfort</span>
+        <span class="kw-tag muted">Trust</span>
+        <span class="kw-tag muted">Functional Care</span>
+        <span class="kw-tag muted">Field Pharmacy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     06. HERO SKU STRATEGY
+============================================================ -->
+<section id="hero-sku">
+  <div class="section-tag fade-up">06 — Hero SKU Strategy</div>
+  <h2 class="section-title fade-up">피토캄 세럼 중심으로<br/>브랜드 인식 단순화</h2>
+  <p class="section-desc fade-up">
+    에어리 선스크린은 단기 유입에 적합하지만 계절 의존성이 큽니다. 연중 사용 가능한
+    피토캄 세럼을 Hero SKU로 설정해 "민감 피부 진정 – 장벽 회복 – 트러블 케어" 메시지를
+    브랜드 중심축으로 정리했습니다.
+  </p>
+  <div class="sku-flow fade-up">
+    <div class="sku-card">
+      <div class="sku-phase">현 대표 주력</div>
+      <!-- 📌 이미지 교체: .sku-img-box 배경 교체 -->
+      <div class="sku-img-box dim">AIRY SUNSCREEN</div>
+      <div class="sku-name" style="color:var(--black);">Airy Sunscreen</div>
+      <div class="sku-sub">Seasonal Entry</div>
+    </div>
+    <div class="sku-arrow">→</div>
+    <div class="sku-card active">
+      <div class="sku-phase">2025 H2 Focus</div>
+      <!-- 📌 이미지 교체: .sku-img-box 배경 교체 -->
+      <div class="sku-img-box">PHYTO CALM SERUM</div>
+      <div class="sku-name">Phyto Calm Serum</div>
+      <div class="sku-sub" style="color:rgba(255,255,255,0.5);">Hero SKU</div>
+    </div>
+    <div class="sku-arrow">→</div>
+    <div class="sku-card">
+      <div class="sku-phase">Line Extension</div>
+      <!-- 📌 이미지 교체: .sku-img-box 배경 교체 -->
+      <div class="sku-img-box dim">PORE-FIT / CLEANSER</div>
+      <div class="sku-name" style="color:var(--black);">Pore-fit / Cleanser</div>
+      <div class="sku-sub">Routine Expansion</div>
+    </div>
+  </div>
+  <div class="sku-timeline fade-up">
+    단기: 세럼 집중 메시지 &nbsp;/&nbsp; 중기: 포어핏 라인 확장 &nbsp;/&nbsp; 장기: 민감 피부 전문 브랜드 확립
+  </div>
+</section>
+
+<!-- ============================================================
+     07. WEBSITE UI/UX RENEWAL
+============================================================ -->
+<section id="ux-renewal">
+  <div class="section-tag fade-up">07 — Website UI/UX Renewal</div>
+  <h2 class="section-title fade-up">자사몰 UI/UX 리뉴얼</h2>
+  <p class="section-desc fade-up">
+    브랜드 이해부터 제품 탐색, 구매까지의 여정을 재설계하여 사용자 경험을 직관적이고,
+    개선하고 전환 효율을 높였습니다. 정보 구조와 시각적 일관성을 강화해 브랜드 가치를 효과적으로 전달합니다.
+  </p>
+  <div class="ux-layout fade-up">
+    <div>
+      <p style="font-size:11px;letter-spacing:2px;color:var(--gray-500);margin-bottom:8px;font-family:var(--font-mono);">BEFORE</p>
+      <!-- 📌 이미지 교체 -->
+      <div class="ux-screen before-screen">BEFORE SCREENSHOT</div>
+      <p style="font-size:11px;letter-spacing:2px;color:var(--gray-500);margin:24px 0 8px;font-family:var(--font-mono);">AFTER</p>
+      <!-- 📌 이미지 교체 -->
+      <div class="ux-screen after-screen">AFTER SCREENSHOT</div>
+    </div>
+    <div>
+      <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:2px;color:var(--feld-blue);margin-bottom:16px;">UX FLOW</p>
+      <div class="ux-flow-list">
+        <div class="ux-flow-item highlight">
+          <div class="ux-icon">🏛</div>
+          <div>
+            <div class="ux-flow-title">Brand Entry</div>
+            <div class="ux-flow-desc">브랜드 아이덴티티의 핵심 메시지를 균일도 향상</div>
+          </div>
+        </div>
+        <div class="ux-flow-item">
+          <div class="ux-icon">🔍</div>
+          <div>
+            <div class="ux-flow-title">Product Discovery</div>
+            <div class="ux-flow-desc">직관적인 카테고리와 검색/추천으로 제품 탐색 지원</div>
+          </div>
+        </div>
+        <div class="ux-flow-item">
+          <div class="ux-icon">🏷</div>
+          <div>
+            <div class="ux-flow-title">Promotion</div>
+            <div class="ux-flow-desc">프로모션의 랜딩을 화면에 배치하여 관심 유도</div>
+          </div>
+        </div>
+        <div class="ux-flow-item highlight">
+          <div class="ux-icon">🛒</div>
+          <div>
+            <div class="ux-flow-title">Conversion</div>
+            <div class="ux-flow-desc">간결한 구매 프로세와 정보 제공으로 전환 최적화</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:2px;">
+        <div class="ux-flow-item" style="background:var(--white);">
+          <div class="ux-icon" style="background:var(--gray-100);">📊</div>
+          <div>
+            <div class="ux-flow-title" style="color:var(--feld-blue);">정보 구조 정리</div>
+            <div class="ux-flow-desc">직관적인 메뉴와 흐름으로 재구성하여 필요한 장보를 빠르고 쉽게 찾을 수 있도록 개선했습니다.</div>
+          </div>
+        </div>
+        <div class="ux-flow-item" style="background:var(--white);">
+          <div class="ux-icon" style="background:var(--gray-100);">⭐</div>
+          <div>
+            <div class="ux-flow-title" style="color:var(--feld-blue);">브랜드 경험 강화</div>
+            <div class="ux-flow-desc">동일한 비주얼 시스템과 감도 높은 이미지로 브랜드 아이덴티티와 일관되게 전달합니다.</div>
+          </div>
+        </div>
+        <div class="ux-flow-item" style="background:var(--white);">
+          <div class="ux-icon" style="background:var(--gray-100);">📈</div>
+          <div>
+            <div class="ux-flow-title" style="color:var(--feld-blue);">전환 효율 개선</div>
+            <div class="ux-flow-desc">단계별 구매 여정을 단순화하고, 신뢰 요소를 강조하여 전환율을 높였습니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     08. PRODUCT COMMUNICATION
+============================================================ -->
+<section id="product-comm">
+  <div class="section-tag fade-up">08 — Product Communication</div>
+  <h2 class="section-title fade-up">복잡한 기능 정보를<br/>구매 설득 구조로 재배열</h2>
+  <p class="section-desc fade-up">
+    피토캄 세럼의 소구점은 민감성/트러블 피부 진정, 피지 조절, 수분 공급, 잡티 흔적 케어로 정리했습니다.
+    상세페이지는 문제 공감 – 솔루션 – 성분/기술 – 사용감 – 리뷰 신뢰로 이어지게 구성합니다.
+  </p>
+  <div class="detail-arch fade-up">
+    <div class="arch-step">
+      <div class="arch-num">01</div>
+      <div class="arch-label">Hero</div>
+      <div class="arch-desc">제품컷 + 핵심 효능 한 줄</div>
+    </div>
+    <div class="arch-step">
+      <div class="arch-num">02</div>
+      <div class="arch-label">Problem</div>
+      <div class="arch-desc">민감/트러블 피부 고민 공감</div>
+    </div>
+    <div class="arch-step">
+      <div class="arch-num">03</div>
+      <div class="arch-label">Solution</div>
+      <div class="arch-desc">진정 + 장벽 강화 + 흔적 케어</div>
+    </div>
+    <div class="arch-step">
+      <div class="arch-num">04</div>
+      <div class="arch-label">Ingredient</div>
+      <div class="arch-desc">약초 성분 / 저자극 / 무첨가</div>
+    </div>
+    <div class="arch-step">
+      <div class="arch-num">05</div>
+      <div class="arch-label">Trust</div>
+      <div class="arch-desc">리뷰, 테스트, 사용 루틴</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     09. PACKAGE IDENTITY SYSTEM
+============================================================ -->
+<section id="package">
+  <div class="section-tag fade-up">09 — Package Identity System</div>
+  <h2 class="section-title fade-up">펠드 블루를 중심으로<br/>제품별 기능과 성격에 맞춘 확장</h2>
+  <p class="section-desc fade-up">
+    패키지는 펠드의 기능성, 클린 메디컬 무드, 피부 솔루션 이미지를 유지하면서
+    제품별 사용 목적과 구매 접점에 맞춰 확장했습니다.
+  </p>
+  <div class="pkg-grid fade-up">
+    <div class="pkg-card">
+      <!-- 📌 이미지 교체: .pkg-img.p1 배경 or <img> 삽입 -->
+      <div class="pkg-img p1">TONE-UP CREAM</div>
+      <div class="pkg-info">
+        <div class="pkg-type">Package 01</div>
+        <h3>Tone-up Cream</h3>
+        <p>Bright-G / SPF 50+ · 기능성 데일리 케어</p>
+      </div>
+    </div>
+    <div class="pkg-card">
+      <!-- 📌 이미지 교체 -->
+      <div class="pkg-img p2">WELCOME KIT</div>
+      <div class="pkg-info">
+        <div class="pkg-type">Package 02</div>
+        <h3>Welcome Kit</h3>
+        <p>First Aid Kit · 첫 구매 체험 키트</p>
+      </div>
+    </div>
+    <div class="pkg-card">
+      <!-- 📌 이미지 교체 -->
+      <div class="pkg-img p3">LIP BALM</div>
+      <div class="pkg-info">
+        <div class="pkg-type">Package 03</div>
+        <h3>FULL!P</h3>
+        <p>Lip Balm · 입술 보습 확장 제품</p>
+      </div>
+    </div>
+    <div class="pkg-card">
+      <!-- 📌 이미지 교체 -->
+      <div class="pkg-img p4">LEAFLET</div>
+      <div class="pkg-info">
+        <div class="pkg-type">Contents</div>
+        <h3>Leaflet</h3>
+        <p>Brand Guide · 루틴 추천 접지물</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     10. PACKAGE DETAIL
+============================================================ -->
+<section id="package-detail">
+  <div class="section-tag fade-up">10 — Package Detail</div>
+  <div class="pkg-detail-layout fade-up">
+    <div class="pkg-detail-card">
+      <h3>Bright-G<br/>Tone-up Cream</h3>
+      <p>
+        톤업크림은 밝고 화사한 피부 표현을 제안하는 제품이지만, 펠드의 브랜드 톤 안에서는
+        과한 메이크업 제품보다 기능성 데일리 케어 제품으로 인식되어야 했습니다.
+      </p>
+      <ul class="pkg-points">
+        <li>화이트 / 블루 / 실버 중심의 클린 메디컬 무드</li>
+        <li>Bright-G Activating Moisturizer 문안 체계 정리</li>
+        <li>SPF 50+ PA++++ 기능 정보와 성분 메시지 간결화</li>
+        <li>제품명, 용량, 핵심 성분의 우선순위 설계</li>
+      </ul>
+    </div>
+    <div class="pkg-detail-card">
+      <h3>Welcome Kit<br/>First Aid Kit</h3>
+      <p>
+        웰컴키트는 신규 고객이 펠드를 처음 경험하는 접점입니다. 단순 샘플 패키지가 아니라,
+        피부가 불편할 때 바로 꺼내 쓰는 작은 응급 키트처럼 느껴지도록 First Aid Kit 콘셉트로 접근했습니다.
+      </p>
+      <ul class="pkg-points">
+        <li>GWP / First Experience</li>
+        <li>Silver + Translucent + Blue</li>
+      </ul>
+      <div class="concept-copy">
+        "Less irritation, more balance.<br/>
+        Only what the skin truly needs."
+      </div>
+    </div>
+    <div class="pkg-detail-card">
+      <h3>FULL!P<br/>Lip Balm</h3>
+      <p>
+        립밤은 펠드의 기존 스킨케어 라인과 달리 더 작고 감각적인 제품입니다. FULL!P 네이밍을 활용해
+        입술을 안팎으로 채우는 이미지, 원형 용기, 키링 패키지, 블루 포인트 컬러를 적용했습니다.
+      </p>
+      <ul class="pkg-points">
+        <li>기능성 브랜드의 신뢰감은 유지하되, 소형 제품의 위트 강화</li>
+        <li>원형 용기와 반복 타이포로 "채움"의 인상 표현</li>
+        <li>펠드 블루 포인트로 기존 브랜드 라인과 연결</li>
+        <li>키링/파우치형 GWP 확장 가능성 검토</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     11. CAMPAIGN & CONTENTS
+============================================================ -->
+<section id="campaign">
+  <div class="section-tag fade-up">11 — Leaflet / Campaign / Contents</div>
+  <h2 class="section-title fade-up">온라인 경험을 오프라인과<br/>콘텐츠 접점으로 확장</h2>
+  <p class="section-desc fade-up">
+    리플렛은 브랜드 모델 이미지, 피부 타입 QR, 제품 루틴 추천, 라인업 정보를 한 장의 접지물 안에 압축한
+    오프라인 접점입니다. 캠페인과 콘텐츠는 "펠드에 부탁해"처럼 기억하기 쉬운 문구로 브랜드 연상성을 강화합니다.
+  </p>
+  <div class="campaign-grid fade-up">
+    <div class="camp-item c1" style="min-height:320px;">
+      <!-- 📌 이미지 교체 -->
+      <div class="camp-label">5-Fold Leaflet Guide</div>
+      <div class="camp-title">Brand<br/>Leaflet</div>
+      <div class="camp-desc">브랜드 모델, 피부 타입 QR, 루틴 추천, 라인업 정보</div>
+    </div>
+    <div class="camp-item c2">
+      <!-- 📌 이미지 교체 -->
+      <div class="camp-label">Main Banner</div>
+      <div class="camp-title">펠드에<br/>부탁해</div>
+    </div>
+    <div class="camp-item c3">
+      <!-- 📌 이미지 교체 -->
+      <div class="camp-label">Welcome Deal</div>
+      <div class="camp-title">첫 구매<br/>100원!</div>
+    </div>
+    <div class="camp-item c4">
+      <!-- 📌 이미지 교체 -->
+      <div class="camp-label">Campaign Plan</div>
+      <div class="camp-title">Campaign<br/>Strategy</div>
+      <div class="camp-desc">기능성 콘텐츠 전략 & 마케팅 교류 활동 방안</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     12. OUTCOME
+============================================================ -->
+<section id="outcome">
+  <div class="outcome-layout">
+    <div class="fade-up">
+      <div class="section-tag" style="color:rgba(255,255,255,0.5);">12 — Outcome</div>
+      <div class="outcome-title">FELD<br/>BRAND<br/>SYSTEM</div>
+      <p class="outcome-desc">
+        펠드아포테케 프로젝트는 단순한 패키지 디자인 작업을 넘어, 브랜드가 소비자에게 어떤 인상으로
+        기억되어야 하는지 정리하고 이를 실제 디자인 접점으로 확장한 프로젝트입니다.
+      </p>
+    </div>
+    <div class="fade-up">
+      <div class="outcome-items">
+        <div class="outcome-item">
+          <div class="outcome-item-label">Message</div>
+          <div class="outcome-item-desc">필요 – 신뢰 – 편안함 중심으로 브랜드 메시지 압축</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-item-label">Hero SKU</div>
+          <div class="outcome-item-desc">피토캄 세럼 중심의 민감 피부 솔루션 인식 강화</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-item-label">Commerce</div>
+          <div class="outcome-item-desc">자사몰 UI/UX 흐름을 구매 전환 관점으로 재정리</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-item-label">Application</div>
+          <div class="outcome-item-desc">패키지, 리플렛, 콘텐츠까지 일관된 톤으로 확장</div>
+        </div>
+      </div>
+      <div style="margin-top:32px;padding:28px;background:rgba(0,0,0,0.15);">
+        <p style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.5);margin-bottom:8px;">BRAND APPLICATION SYSTEM</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.8;">
+          브랜드 메시지 · 상품 전략 · 자사몰 · 패키지 · 콘텐츠를 하나의 방향으로 정리
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">FELD<span>·</span>APOTHEKE</div>
+    <p style="font-family:var(--font-mono);font-size:11px;color:var(--gray-500);margin-top:8px;letter-spacing:1px;">
+      Rebranding &amp; Brand Application Portfolio
+    </p>
+  </div>
+  <div class="footer-meta">
+    Package Design / Website UI&amp;UX<br/>
+    Brand Application / Contents Direction<br/>
+    <span style="color:var(--feld-blue);">From Necessity to Comfort</span>
+  </div>
+</footer>
+
+<!-- ============================================================
+     SCRIPTS
+============================================================ -->
+<script>
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    document.getElementById('scrollBar').style.width = progress + '%';
+  });
+
+  // Fade-up on scroll
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
